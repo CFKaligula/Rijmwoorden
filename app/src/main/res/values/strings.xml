@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rijmwoorden</string>
+    <string name="title">Rijmwoorden</string>
+    <string name="input_text">Voer een woord in</string>
+    <string name="search_button">Zoek!</string>
+    <string name="full_rhyme">Volle rijm</string>
+    <string name="vowel_rhyme">Klinkerrijm</string>
+    <string name="results">Resultaten:</string>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/alegreya_bold"
+        android:text="@string/title"
+        android:textColor="#8E24AA"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_word"
+        android:autofillHints="@string/input_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+        android:ems="10"
+        android:fontFamily="@font/alef"
+        android:hint="@string/input_text"
+        android:inputType="textFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:fadingEdge="horizontal|vertical"
+        android:fontFamily="@font/alef"
+        android:onClick="sendMessage"
+        android:padding="16dp"
+        android:text="@string/search_button"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/input_word"
+        app:layout_constraintStart_toEndOf="@+id/input_word" />
+
+    <ToggleButton
+        android:id="@+id/rhyme_type_toggle"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#AB47BC"
+        android:fontFamily="@font/alef"
+        android:padding="8dp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textOff="@string/vowel_rhyme"
+        android:textOn="@string/full_rhyme"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/input_word"
+        app:layout_constraintTop_toBottomOf="@+id/input_word" />
+
+    <TextView
+        android:id="@+id/rhymeWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginRight="173dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="186dp"
+        android:layout_marginLeft="186dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginRight="167dp"
+        android:fontFamily="@font/alef"
+        android:text="@string/results"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rhyme_type_toggle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
