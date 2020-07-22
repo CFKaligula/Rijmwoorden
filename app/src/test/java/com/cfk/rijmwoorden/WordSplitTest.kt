@@ -9,13 +9,7 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
-
-
+class WordSplitTest {
     @Test
     fun split_word() {
         val test_dict = mapOf<String, String>(
@@ -55,9 +49,5 @@ class ExampleUnitTest {
         assertEquals(dict_entry.value, Word(dict_entry.key).get_split_word())
     }
 
-    @Test
-    fun chronische_test() {
-        assertEquals( "chro-ni-sche", Word("chronische").get_split_word())
-    }
 
 }

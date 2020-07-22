@@ -1,12 +1,16 @@
 package com.cfk.rijmwoorden
 
+import android.util.Log
+
+private const val TAG = "MyActivity"
+
 class Syllable(inputText: String = "", prev_syl: Syllable? = null,  next_syl: Syllable? = null, word: Word? = null ) {
     val word = word
     var start_cons = ""
     var vowels = ""
     var end_cons = ""
     val prev_syl = prev_syl
-    val next_syl = next_syl
+    var next_syl = next_syl
     val text: String
         get() = start_cons + vowels + end_cons
 
@@ -36,7 +40,7 @@ class Syllable(inputText: String = "", prev_syl: Syllable? = null,  next_syl: Sy
         if ( (prev_syl != null ) and !(start_cons + vowels == "tje"))
         //if we have a previous syllable and our syllable does not contain the diminutive 'tje' (as in autootje)
         {
-            while (!((start_cons in LetterDictionaries().valid_consonant_combinations) or
+             while (!((start_cons in LetterDictionaries().valid_consonant_combinations) or
                         (start_cons in LetterDictionaries().consonants))){
                 //while your start vowels are neither a valid consonant combination nor a single consonant
                 //append the first start con to the previous syllable's end cons
@@ -46,28 +50,28 @@ class Syllable(inputText: String = "", prev_syl: Syllable? = null,  next_syl: Sy
         }
     }
 
-    fun fix_end_cons(index: Int){
+    fun fix_end_cons(index: Int): Int{
         var index = index
         if((end_cons.length == 1) and (end_cons != "x")){
             end_cons = ""
             index -= 1
         } else{
-            when(end_cons){
-                "tj" -> {
+            when {
+                end_cons == "tj" -> {
                     end_cons = ""
                     index -= 2
                 }
-                "sch" -> {
+                end_cons =="sch" -> {
                     end_cons = ""
                     index -= 3
                 }
-                in setOf("", "ch", "kw", "th", "ng") -> {
-                    end_cons = end_cons[0].toString()
+                !(end_cons  in setOf("", "ch", "kw", "th", "ng")) -> {
                     index -= end_cons.length-1
-                }
+                    end_cons = end_cons[0].toString()
+                    }
             }
         }
-
+        return index
     }
 
     fun add_cons(cons: String){
@@ -96,7 +100,7 @@ class Syllable(inputText: String = "", prev_syl: Syllable? = null,  next_syl: Sy
             vowels += vowel
         } else if ((vowels + vowel) in LetterDictionaries().dipthongs){
             vowels += vowel
-            break_bool = true //we know we cant make a tripthong, so we can break
+            //break_bool = true //we know we cant make a tripthong, so we can break
         } else{
             break_bool = true
         }

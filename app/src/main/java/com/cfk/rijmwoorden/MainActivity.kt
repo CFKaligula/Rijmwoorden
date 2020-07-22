@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val word = Word("hallo")
+
         val syllable = Syllable("balk")
 
         Log.w(TAG, "${syllable.start_cons}, ${syllable.vowels}, ${syllable.end_cons}")
@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
         Log.w(TAG, "Remove accent: ${LetterDictionaries().remove_accent("é")}")
         //Log.w(TAG, "Remove accent: ${remove_accent("k")}")
 
+        val word = Word("chronische")
         Log.w(TAG, "Length of ${word.text} is: ${word.length}")
+        Log.w(TAG, "Split word of ${word.text} is: ${word.get_split_word()}")
 
         val toggle: ToggleButton = findViewById<ToggleButton>(R.id.rhyme_type_toggle)
         toggle.setBackgroundColor(Color.parseColor("#B388FF"))
@@ -47,12 +49,13 @@ class MainActivity : AppCompatActivity() {
     fun sendMessage(view: View) {
         val editText = findViewById<EditText>(R.id.input_word)
         val message = editText.text.toString()
+        val word = Word(message)
         var rhymeType = ""
 
        val rhymewords = message
 
         findViewById<TextView>(R.id.rhymeWords).apply {
-            text = rhymewords.toString()
+            text = word.get_split_word()
         }
 
     }
