@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -44,6 +45,18 @@ class MainActivity : AppCompatActivity() {
                 // The toggle is disabled
             }
         }
+               //check if enter key has been pressed
+        val editText = findViewById<EditText>(R.id.input_word)
+        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                //Perform Code
+                sendMessage(v)
+
+            }
+            false
+        })
+
+
 
     }
     fun sendMessage(view: View) {
@@ -55,7 +68,7 @@ class MainActivity : AppCompatActivity() {
        val rhymewords = message
 
         findViewById<TextView>(R.id.rhymeWords).apply {
-            text = word.get_split_word()
+            text = "Opgesplitst in lettergrepen:\n${word.get_split_word()}"
         }
 
     }

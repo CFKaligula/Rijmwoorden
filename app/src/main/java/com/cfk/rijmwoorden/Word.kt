@@ -11,10 +11,10 @@ class Word(inputText: String) {
 
     fun get_split_word(): String {
         var result = ""
-        for (syllable in syllables) {
+        for (syllable:Syllable in syllables) {
             result += syllable.text + LetterDictionaries().break_symbol
         }
-        result = result.subSequence(0, result.length - 1).toString()
+        if (result.length > 1) result = result.subSequence(0, result.length - 1).toString()
         return result
     }
 
@@ -101,11 +101,13 @@ class Word(inputText: String) {
 
     private fun initialize_phonetisation(): String {
         var result = ""
-        for (syllable in syllables){
-            when{
-                syllable.start_cons != null -> result += Phonetics().find_start_con_phonetics(syllable)
-                syllable.vowels != null-> result += Phonetics().find_vowel_phonetics(syllable)
-                syllable.end_cons != null-> result += Phonetics().find_end_con_phonetics(syllable)
+        for (syllable in syllables) {
+            when {
+                syllable.start_cons != "" -> result += Phonetics().find_start_con_phonetics(
+                    syllable
+                )
+                syllable.vowels != "" -> result += Phonetics().find_vowel_phonetics(syllable)
+                syllable.end_cons != "" -> result += Phonetics().find_end_con_phonetics(syllable)
             }
         }
         return result

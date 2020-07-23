@@ -20,13 +20,12 @@ class Phonetics {
         } else {
             for (i in 0 until syllable.start_cons.length) {
 
+                //e.g. blokken -> bloken
                 if ((i == 0) and (syllable.start_cons[i].toString() ==
                             syllable.prev_syl.end_cons.takeLast(1).toString())
-                ) {
-                    //e.g. blokken -> bloken
-                    continue
-                }
-                val sound = when (syllable.start_cons[i].toString()) {
+                ) continue
+
+                val sound: String = when (syllable.start_cons[i].toString()) {
                     "c" -> StartPhonetics().find_start_c_phonetics()
                     "h" -> StartPhonetics().find_start_h_phonetics()
                     "j" -> StartPhonetics().find_start_j_phonetics()
@@ -35,25 +34,21 @@ class Phonetics {
                     "q" -> StartPhonetics().find_start_q_phonetics()
                     else -> StartPhonetics().default_start_consonant_replacement(syllable, i)
                 }
-                println(sound)
+
                 if (start_con_sound.takeLast(1).toString() != sound) {
                     if ((syllable.prev_syl !is EmptySyllable) or
-                        (find_end_con_phonetics(syllable.prev_syl).takeLast(1) != sound)){
+                        (find_end_con_phonetics(syllable.prev_syl).takeLast(1) != sound))
                         start_con_sound += sound
-                    }
-
-
-
                 }
-
-
             }
         }
         return start_con_sound
     }
 
     fun find_vowel_phonetics(syllable: ASyllable): String {
-        return "wiwo"
+        var vowel_sound = ""
+
+        return vowel_sound
     }
 
     fun find_end_con_phonetics(syllable: ASyllable): String {

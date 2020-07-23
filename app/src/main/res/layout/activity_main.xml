@@ -27,7 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÁÄáäÉËéëÍÏíïÚÜúüÓÖóö-"
         android:ems="10"
         android:fontFamily="@font/alef"
         android:hint="@string/input_text"
@@ -41,6 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:fadingEdge="horizontal|vertical"
         android:fontFamily="@font/alef"
         android:onClick="sendMessage"
@@ -49,6 +51,7 @@
         android:textAllCaps="false"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/input_word"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/input_word" />
 
     <ToggleButton
