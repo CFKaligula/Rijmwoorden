@@ -45,7 +45,7 @@ class WordSplitTest {
 
     }
 
-    fun test_split_word(dict_entry: Map.Entry<String, String>){
+    private fun test_split_word(dict_entry: Map.Entry<String, String>){
         assertEquals(dict_entry.value, Word(dict_entry.key).get_split_word())
     }
 

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         Log.w(TAG, "Length of ${word.text} is: ${word.length}")
         Log.w(TAG, "Split word of ${word.text} is: ${word.get_split_word()}")
 
-        val toggle: ToggleButton = findViewById<ToggleButton>(R.id.rhyme_type_toggle)
+        val toggle: ToggleButton = findViewById(R.id.rhyme_type_toggle)
         toggle.setBackgroundColor(Color.parseColor("#B388FF"))
         var rhymeType = ""
         toggle.setOnCheckedChangeListener { _, isChecked ->
