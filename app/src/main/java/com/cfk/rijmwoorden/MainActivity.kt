@@ -1,7 +1,6 @@
 package com.cfk.rijmwoorden
 
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -20,15 +19,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val toggle: ToggleButton = findViewById(R.id.rhyme_type_toggle)
-        toggle.setBackground(getResources().getDrawable(R.drawable.vowel_rhyme_type_button))
+        toggle.background = getResources().getDrawable(R.drawable.vowel_rhyme_type_button)
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 rhymeType = "full"
-                toggle.setBackground(getResources().getDrawable(R.drawable.full_rhyme_type_button))
+                toggle.background = getResources().getDrawable(R.drawable.full_rhyme_type_button)
                 // The toggle is enabled
             } else {
                 rhymeType = "vowel"
-                toggle.setBackground(getResources().getDrawable(R.drawable.vowel_rhyme_type_button))
+                toggle.background = resources.getDrawable(R.drawable.vowel_rhyme_type_button)
                 // The toggle is disabled
             }
         }
@@ -71,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun hideKeyboard(activity: Activity) {
+
+    private fun hideKeyboard(activity: Activity) {
         val imm: InputMethodManager =
             activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         //Find the currently focused view, so we can grab the correct window token from it.

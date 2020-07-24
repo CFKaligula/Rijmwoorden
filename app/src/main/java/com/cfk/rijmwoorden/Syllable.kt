@@ -23,17 +23,16 @@ class Syllable(
     val prev_syl_last_end_con: String
         get() {
             var result = ""
-            if (prev_syl.end_cons != "" ) {
+            if (prev_syl.end_cons != "") {
                 val previous_syllable = Syllable(prev_syl.text)
                 result = previous_syllable.end_cons.takeLast(1)
             }
-             return result
+            return result
         }
 
     init {
         find_cons_and_vowels(inputText.toLowerCase(Locale.getDefault()))
     }
-
 
 
     private fun find_cons_and_vowels(text: String) {

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 
 class StartPhonetics {
 
-    @SuppressLint("NewApi")
+
     fun default_start_consonant_replacement(syllable: Syllable, i: Int): String {
         val switcher = mapOf(
             "y" to "j",

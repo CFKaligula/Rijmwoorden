@@ -3,7 +3,7 @@ package com.cfk.rijmwoorden
 import android.annotation.SuppressLint
 
 class EndPhonetics {
-    @SuppressLint("NewApi")
+
     fun default_end_consonant_replacement(ASyllable: ASyllable, i: Int): String {
         val switcher = mapOf(
             "y" to "j",

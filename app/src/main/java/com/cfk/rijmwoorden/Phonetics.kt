@@ -5,14 +5,14 @@ import android.annotation.SuppressLint
 class Phonetics {
 
 
-    @SuppressLint("NewApi")
+
     fun find_start_con_phonetics(syllable: Syllable): String {
         var start_con_sound = ""
         if (syllable.start_cons == "tj") {
             // e.g. autoo-tje
             start_con_sound = "ð"
         } else {
-            for (i in 0 until syllable.start_cons.length) {
+            for (i in syllable.start_cons.indices) {
                 //e.g. blokken -> bloken
                 if ((i == 0) and (syllable.start_cons[i].toString() ==
                             syllable.prev_syl.end_cons.takeLast(1))
@@ -46,7 +46,7 @@ class Phonetics {
 
     fun find_end_con_phonetics(syllable: Syllable): String {
         var end_con_sound = ""
-        for (i in 0 until syllable.end_cons.length) {
+        for (i in syllable.end_cons.indices) {
             val sound = when (syllable.end_cons[i].toString()) {
                 "b" -> EndPhonetics().find_end_b_phonetics(syllable, i)
                 "c" -> EndPhonetics().find_end_c_phonetics(syllable, i)
@@ -136,7 +136,7 @@ class Phonetics {
     }
 
 
-    @SuppressLint("NewApi")
+    
     fun add_accent(vowel: String): String {
         val switcher = mapOf(
             "a" to "á",  // la = laa
@@ -148,7 +148,7 @@ class Phonetics {
         return switcher.getOrDefault(vowel, vowel)
     }
 
-    @SuppressLint("NewApi")
+
     fun ending_vowel(vowel: String): String {
         val switcher = mapOf(
             "a" to "á", //ga
@@ -161,7 +161,7 @@ class Phonetics {
         return switcher.getOrDefault(vowel, vowel)
     }
 
-    @SuppressLint("NewApi")
+
     fun default_phonetic_symbol(dipthong: String): String {
         val switcher = mapOf(
             "aa" to "á",
@@ -189,7 +189,7 @@ class Phonetics {
     }
 
 
-    @SuppressLint("NewApi")
+
     fun r_or_l_phonetic_symbol(vowel: String): String {
         val switcher = mapOf(
             "aa" to "á:",
@@ -206,7 +206,7 @@ class Phonetics {
     }
 
 
-    @SuppressLint("NewApi")
+
     fun next_syl_r(vowel: String): String {
         val switcher = mapOf(
             "o" to "o:",  // blij-e
