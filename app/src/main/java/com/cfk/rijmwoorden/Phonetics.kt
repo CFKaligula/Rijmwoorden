@@ -182,7 +182,7 @@ class Phonetics {
             "eau" to "ó",
             "ooi" to "Ó",
             "oei" to "Ö",
-            "oeu" to "uu",
+            "oeu" to "u:",
             "y" to "í"   // sexy
         )
         return switcher.getOrDefault(dipthong, "DIPTHONGERROR")
@@ -192,15 +192,15 @@ class Phonetics {
     @SuppressLint("NewApi")
     fun r_or_l_phonetic_symbol(vowel: String): String {
         val switcher = mapOf<String, String>(
-            "aa" to "á0",
-            "ee" to "ii",
-            "ie" to "í0",
-            "oo" to "o0",
-            "uu" to "ú0",
-            "ij" to "ee",
-            "ei" to "ee",
-            "oe" to "ö0",
-            "ui" to "ü0"
+            "aa" to "á:",
+            "ee" to "i:",
+            "ie" to "í:",
+            "oo" to "o:",
+            "uu" to "ú:",
+            "ij" to "e:",
+            "ei" to "e:",
+            "oe" to "ö:",
+            "ui" to "ü:"
         )
         return switcher.getOrDefault(vowel, vowel)
     }
@@ -209,8 +209,8 @@ class Phonetics {
     @SuppressLint("NewApi")
     fun next_syl_r(vowel: String): String {
         val switcher = mapOf<String, String>(
-            "o" to "oo",  // blij-e
-            "e" to "ii"  // baby
+            "o" to "o:",  // blij-e
+            "e" to "i:"  // baby
         )
         return switcher.getOrDefault(vowel, vowel)
     }

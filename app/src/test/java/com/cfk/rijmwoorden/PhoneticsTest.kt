@@ -23,8 +23,8 @@ class PhoneticsTest {
     @Test
     fun default_vowel_test() {
         assertEquals("í", Phonetics().find_vowel_phonetics(Syllable("biet")))
-        assertEquals("á0", Phonetics().find_vowel_phonetics(Syllable("gaal")))
-        assertEquals("ii", Phonetics().find_vowel_phonetics(Syllable("scheer")))
+        assertEquals("á:", Phonetics().find_vowel_phonetics(Syllable("gaal")))
+        assertEquals("i:", Phonetics().find_vowel_phonetics(Syllable("scheer")))
         assertEquals("í", Phonetics().find_vowel_phonetics(Syllable("tie")))
         assertEquals("e", Phonetics().find_vowel_phonetics(Syllable("pen")))
         assertEquals("á", Phonetics().find_vowel_phonetics(Syllable("ga")))
@@ -34,49 +34,63 @@ class PhoneticsTest {
     @Test
     fun phonetics_dict() {
         val test_dict = mapOf(
+            "appel" to "apel",
+
+            "baas" to "bás",
+            "bezem" to "bézem",
+            "bezet" to "b0zet",
+            "bijl" to "be:l",
+            "blokken" to "blok0n",
+
+            "ceder" to "séd0r",
+            "casus" to "kásus",
+            "chronische" to "grónís0",
+            "chronisch" to "grónís",
+            "citroen" to "sítrön",
+
+            "denken" to "denk0n",
+
             "ga" to "gá",
-            "pen" to "pen",
             "ga" to "gá",
             "gas" to "gas",
             "gade" to "gád0",
-            "sexy" to "seksí",
             "gaas" to "gás",
-            "gaal" to "gá0l",
-            "baas" to "bás",
-            "lijk" to "lïk",
-            "bijl" to "beel",
-            "lang" to "laµ",
-            "chronische" to "grónís0",
-            "chronisch" to "grónís",
-            "scepter" to "sept0r",
-            "ceder" to "séd0r",
-            "casus" to "kásus",
-            "herkennen" to "herken0n",
-            "denken" to "denk0n",
-            "bezem" to "bézem",
-            "bezet" to "b0zet",
+            "gaal" to "gá:l",
+            "gaai" to "gÁ",
             "gag" to "gaæ",
-            "taxi" to "taksí",
-            "yoga" to "jógá",
-            "schaar" to "sgá0r",
-            "scheren" to "sgiir0n",
+
+            "herkennen" to "herken0n",
+
+            "lijk" to "lïk",
+            "lang" to "laµ",
+
+            "motie" to "mótsí",
+            "moties" to "mótsís",
+            "motie" to "mótsí",
+            "moties" to "mótsís",
+
+            "oranje" to "o:rañ0",
+
+            "pen" to "pen",
             "praatje" to "práð0",
+            "perfectie" to "perfeksí",
+
             "quinty" to "kwintí",
             "quasi" to "kwásí",
-            "citroen" to "sítrön",
-            "appel" to "apel",
-            "blokken" to "blok0n",
-            "oranje" to "oorañ0",
-            "sjaal" to "ßá0l",
-            "motie" to "mótsí",
-            "moties" to "mótsís",
-            "perfectie" to "perfeksí",
+
+            "scepter" to "sept0r",
+            "sexy" to "seksí",
+            "schaar" to "sgá:r",
+            "scheren" to "sgi:r0n",
+            "sjaal" to "ßá:l",
+
+            "taxi" to "taksí",
             "tieten" to "tít0n",
+
             "wordt" to "wort",
             "wondtas" to "wontas",
-            "motie" to "mótsí",
-            "moties" to "mótsís",
-            "gaai" to "gÁ"
+
+            "yoga" to "jógá"
 
         )
         for (test in test_dict) {
