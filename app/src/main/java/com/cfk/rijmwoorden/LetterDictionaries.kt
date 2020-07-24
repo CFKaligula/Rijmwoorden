@@ -83,6 +83,7 @@ class LetterDictionaries {
     )
 
     val phonetic_system_vowels: Set<String> = setOf(
+        "0",
         "a", "i", "e", "o", "u",
         "á", "í", "é", "ó", "ú",
         "ä", "ï", "ë", "ö", "ü",

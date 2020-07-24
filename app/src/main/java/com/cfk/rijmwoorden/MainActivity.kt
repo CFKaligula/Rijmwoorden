@@ -12,28 +12,15 @@ import android.widget.ToggleButton
 
 private const val TAG = "MyActivity"
 
+var rhymeType = "vowel"
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val syllable = Syllable("balk")
-
-        Log.w(TAG, "${syllable.start_cons}, ${syllable.vowels}, ${syllable.end_cons}")
-        val syllable2 = Syllable("káén")
-        Log.w(TAG, "${syllable2.start_cons}, ${syllable2.vowels}, ${syllable2.end_cons}")
-        syllable2.remove_accents()
-        Log.w(TAG, "${syllable2.start_cons}, ${syllable2.vowels}, ${syllable2.end_cons}")
-        Log.w(TAG, "Remove accent: ${LetterDictionaries().remove_accent("é")}")
-        //Log.w(TAG, "Remove accent: ${remove_accent("k")}")
-
-        val word = Word("chronische")
-        Log.w(TAG, "Length of ${word.text} is: ${word.length}")
-        Log.w(TAG, "Split word of ${word.text} is: ${word.get_split_word()}")
-
         val toggle: ToggleButton = findViewById(R.id.rhyme_type_toggle)
         toggle.setBackgroundColor(Color.parseColor("#B388FF"))
-        var rhymeType = ""
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 rhymeType = "full"
@@ -45,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 // The toggle is disabled
             }
         }
-               //check if enter key has been pressed
+        //check if enter key has been pressed
         val editText = findViewById<EditText>(R.id.input_word)
         editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
@@ -57,18 +44,29 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-
     }
+
     fun sendMessage(view: View) {
         val editText = findViewById<EditText>(R.id.input_word)
-        val message = editText.text.toString()
-        val word = Word(message)
-        var rhymeType = ""
+        val input = editText.text.toString()
+        val word = Word(input)
+        val rhymepart: String
+        if (rhymeType == "full") {
+            rhymepart = word.get_rhyme_part()
+        } else {
+            rhymepart = word.get_phonetic_vowels()
+        }
 
-       val rhymewords = message
+        var message = ""
+        message += "Opgesplitst in lettergrepen: " + word.get_split_word()
+        message += "\nFonetisch: " + word.phonetisation
+        message += "\nRijmgedeelte: " + rhymepart
+
+
+        //val rhymewords = message
 
         findViewById<TextView>(R.id.rhymeWords).apply {
-            text = "Opgesplitst in lettergrepen:\n${word.get_split_word()}"
+            text = message
         }
 
     }
