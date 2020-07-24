@@ -92,16 +92,13 @@ class LetterDictionaries {
     )
 
     fun remove_accent(letter: String): String {
-        val result: String = when (letter) {
+        return when (letter) {
             in setOf("á", "ä") -> "a"
             in setOf("é", "ë") -> "e"
             in setOf("í", "ï") -> "i"
             in setOf("ó", "ö") -> "o"
             in setOf("ú", "ü") -> "u"
-            else -> {
-                throw IllegalArgumentException("Cannot remove accent if letter is not a vowel")
-            }
+            else -> throw IllegalArgumentException("Cannot remove accent if letter is not a vowel")
         }
-        return result
     }
 }

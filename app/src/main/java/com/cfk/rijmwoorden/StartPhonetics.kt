@@ -66,18 +66,18 @@ class StartPhonetics {
     fun find_start_s_phonetics(syllable: Syllable, i: Int): String {
         //CHANGED FIRST IF
         var start_con_sound = ""
-        if (i < syllable.start_cons.length - 2 && syllable.start_cons[i + 1] == 'c' && syllable.start_cons[i + 2] == 'h') {
+        start_con_sound = if (i < syllable.start_cons.length - 2 && syllable.start_cons[i + 1] == 'c' && syllable.start_cons[i + 2] == 'h') {
             if ((syllable.vowels + syllable.end_cons) == "e" && syllable.next_syl is EmptySyllable) {
                 //e.g. logi-sche -> -se
-                start_con_sound = "s"
+                "s"
             } else {
-                start_con_sound = "sg"
+                "sg"
             }
 
         } else if (i < syllable.start_cons.length -1 && syllable.start_cons[i+1] == 'j'){
-            start_con_sound = "ß"
+            "ß"
         } else {
-            start_con_sound = "s"
+            "s"
         }
         return start_con_sound
 
@@ -85,16 +85,16 @@ class StartPhonetics {
 
     fun find_start_t_phonetics(syllable: Syllable, i: Int): String {
         var start_con_sound = ""
-        if (syllable.start_cons + syllable.vowels == "tie" && syllable.next_syl is EmptySyllable) {
+        start_con_sound = if (syllable.start_cons + syllable.vowels == "tie" && syllable.next_syl is EmptySyllable) {
             if (syllable.prev_syl_last_end_con != "" && syllable.prev_syl_last_end_con == "c"){
                 // e.g. perfec-tie -> sí
-                start_con_sound = "s"
+                "s"
             } else {
                 //mo-tie -> tsí
-                start_con_sound = "ts"
+                "ts"
             }
         } else {
-            start_con_sound = "t"
+            "t"
         }
         return start_con_sound
 
@@ -102,12 +102,12 @@ class StartPhonetics {
 
     fun find_start_q_phonetics(syllable: Syllable, i: Int): String {
         var start_con_sound = ""
-        if (syllable.vowels != "" && syllable.vowels[0] == 'u'){
+        start_con_sound = if (syllable.vowels != "" && syllable.vowels[0] == 'u'){
             //qua = kwa
-            start_con_sound = "kw"
+            "kw"
         } else {
             // e.g. qat
-            start_con_sound = "k"
+            "k"
         }
         return start_con_sound
 

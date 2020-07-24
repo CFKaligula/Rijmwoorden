@@ -15,7 +15,7 @@ class Phonetics {
             for (i in 0 until syllable.start_cons.length) {
                 //e.g. blokken -> bloken
                 if ((i == 0) and (syllable.start_cons[i].toString() ==
-                            syllable.prev_syl.end_cons.takeLast(1).toString())
+                            syllable.prev_syl.end_cons.takeLast(1))
                 ) continue
 
                 val sound: String = when (syllable.start_cons[i].toString()) {
@@ -29,10 +29,10 @@ class Phonetics {
                 }
 
 
-                if (start_con_sound.takeLast(1).toString() != sound) {
+                if (start_con_sound.takeLast(1) != sound) {
                     val previous_syllable = Syllable(syllable.prev_syl.text)
                     val prev_syl_last_end_con_phonetics = find_end_con_phonetics(previous_syllable)
-                    if (prev_syl_last_end_con_phonetics.length == 0 || prev_syl_last_end_con_phonetics.takeLast(1) != sound) {
+                    if (prev_syl_last_end_con_phonetics == "" || prev_syl_last_end_con_phonetics.takeLast(1) != sound) {
                         start_con_sound += sound
                     }
 
@@ -86,10 +86,10 @@ class Phonetics {
 
             if (syllable.end_cons == "") {
 
-                if ((syllable.next_syl !is EmptySyllable) && (syllable.next_syl.start_cons != "") && (syllable.next_syl.start_cons[0].toString() == "r")) {
-                    vowel_sound = next_syl_r(syllable.vowels)
+                vowel_sound = if ((syllable.next_syl !is EmptySyllable) && (syllable.next_syl.start_cons != "") && (syllable.next_syl.start_cons[0].toString() == "r")) {
+                    next_syl_r(syllable.vowels)
                 } else {
-                    vowel_sound = find_open_vowel_phonetics(syllable)
+                    find_open_vowel_phonetics(syllable)
                 }
 
             } else if (((syllable.vowels + syllable.end_cons) in setOf(
@@ -103,7 +103,7 @@ class Phonetics {
             } else {
                 vowel_sound = syllable.vowels
             }
-        } else if ((syllable.end_cons.toString() != "") && (syllable.end_cons[0].toString() in setOf<String>(
+        } else if ((syllable.end_cons != "") && (syllable.end_cons[0].toString() in setOf(
                 "r",
                 "l"
             ))
@@ -118,18 +118,18 @@ class Phonetics {
     }
 
 
-    fun find_open_vowel_phonetics(syllable: Syllable): String {
+    private fun find_open_vowel_phonetics(syllable: Syllable): String {
         var vowel_sound = ""
-        if (syllable.text in setOf(
+        vowel_sound = if (syllable.text in setOf(
                 "ge",
                 "be"
             ) && syllable.word.text !in LetterDictionaries().preposition_exceptions
         ) {
-            vowel_sound = "0"
+            "0"
         } else if (syllable.next_syl !is EmptySyllable) {
-            vowel_sound = add_accent(syllable.vowels)
+            add_accent(syllable.vowels)
         } else {
-            vowel_sound = ending_vowel(syllable.vowels)
+            ending_vowel(syllable.vowels)
         }
         return vowel_sound
 
@@ -138,7 +138,7 @@ class Phonetics {
 
     @SuppressLint("NewApi")
     fun add_accent(vowel: String): String {
-        val switcher = mapOf<String, String>(
+        val switcher = mapOf(
             "a" to "á",  // la = laa
             "e" to "é",  // beter
             "i" to "í",  // never happens, only in simon i think
@@ -150,7 +150,7 @@ class Phonetics {
 
     @SuppressLint("NewApi")
     fun ending_vowel(vowel: String): String {
-        val switcher = mapOf<String, String>(
+        val switcher = mapOf(
             "a" to "á", //ga
             "i" to "í", //bi
             "e" to "0", // blij-e
@@ -163,7 +163,7 @@ class Phonetics {
 
     @SuppressLint("NewApi")
     fun default_phonetic_symbol(dipthong: String): String {
-        val switcher = mapOf<String, String>(
+        val switcher = mapOf(
             "aa" to "á",
             "ee" to "é",
             "ie" to "í",
@@ -191,7 +191,7 @@ class Phonetics {
 
     @SuppressLint("NewApi")
     fun r_or_l_phonetic_symbol(vowel: String): String {
-        val switcher = mapOf<String, String>(
+        val switcher = mapOf(
             "aa" to "á:",
             "ee" to "i:",
             "ie" to "í:",
@@ -208,7 +208,7 @@ class Phonetics {
 
     @SuppressLint("NewApi")
     fun next_syl_r(vowel: String): String {
-        val switcher = mapOf<String, String>(
+        val switcher = mapOf(
             "o" to "o:",  // blij-e
             "e" to "i:"  // baby
         )

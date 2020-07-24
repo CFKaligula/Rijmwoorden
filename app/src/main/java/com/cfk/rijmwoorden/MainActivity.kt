@@ -1,16 +1,13 @@
 package com.cfk.rijmwoorden
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.ToggleButton
-
-private const val TAG = "MyActivity"
+import androidx.appcompat.app.AppCompatActivity
 
 var rhymeType = "vowel"
 
@@ -34,14 +31,14 @@ class MainActivity : AppCompatActivity() {
         }
         //check if enter key has been pressed
         val editText = findViewById<EditText>(R.id.input_word)
-        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        editText.setOnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 //Perform Code
                 sendMessage(v)
 
             }
             false
-        })
+        }
 
 
     }
@@ -51,16 +48,16 @@ class MainActivity : AppCompatActivity() {
         val input = editText.text.toString()
         val word = Word(input)
         val rhymepart: String
-        if (rhymeType == "full") {
-            rhymepart = word.get_rhyme_part()
+        rhymepart = if (rhymeType == "full") {
+            word.get_rhyme_part()
         } else {
-            rhymepart = word.get_phonetic_vowels()
+            word.get_phonetic_vowels()
         }
 
         var message = ""
         message += "Opgesplitst in lettergrepen: " + word.get_split_word()
         message += "\nFonetisch: " + word.phonetisation
-        message += "\nRijmgedeelte: " + rhymepart
+        message += "\nRijmgedeelte: $rhymepart"
 
 
         //val rhymewords = message

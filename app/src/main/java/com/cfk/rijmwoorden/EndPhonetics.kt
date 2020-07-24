@@ -68,17 +68,17 @@ class EndPhonetics {
 
     fun find_end_n_phonetics(syllable: Syllable, i: Int): String {
         var end_con_sound = ""
-        if (i+1 <= syllable.end_cons.length-1 && syllable.end_cons[i+1] == 'g') {
-            end_con_sound = "µ"
+        end_con_sound = if (i+1 <= syllable.end_cons.length-1 && syllable.end_cons[i+1] == 'g') {
+            "µ"
         } else if (syllable.next_syl !is EmptySyllable && syllable.next_syl.start_cons != "") {
             val next_syl_first_start_con = Syllable(inputText = syllable.next_syl.text).start_cons[0]
             if (next_syl_first_start_con == 'j'){
-                end_con_sound = "ñ"
+                "ñ"
             } else {
-                end_con_sound = "n"
+                "n"
             }
         } else {
-            end_con_sound = "n"
+            "n"
         }
         return end_con_sound
 

@@ -1,11 +1,9 @@
 package com.cfk.rijmwoorden
 
-private const val TAG = "MyActivity"
-
 class Word(inputText: String) {
     val text: String = inputText
-    val length: Int = text.length
-    val syllables: MutableList<Syllable> = initialize_syllables(0, mutableListOf())
+    private val length: Int = text.length
+    private val syllables: MutableList<Syllable> = initialize_syllables(0, mutableListOf())
     val phonetisation: String = initialize_phonetisation()
 
 

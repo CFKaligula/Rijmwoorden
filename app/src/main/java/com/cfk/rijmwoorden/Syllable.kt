@@ -2,8 +2,6 @@ package com.cfk.rijmwoorden
 
 import java.util.*
 
-private const val TAG = "MyActivity"
-
 open class ASyllable {
     var start_cons = ""
     var vowels = ""
