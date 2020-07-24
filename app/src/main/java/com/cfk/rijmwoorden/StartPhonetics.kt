@@ -1,8 +1,6 @@
 package com.cfk.rijmwoorden
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 
 class StartPhonetics {
 

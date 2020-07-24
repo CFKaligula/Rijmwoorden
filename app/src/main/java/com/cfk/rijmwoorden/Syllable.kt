@@ -1,6 +1,5 @@
 package com.cfk.rijmwoorden
 
-import android.util.Log
 import java.util.*
 
 private const val TAG = "MyActivity"
@@ -17,7 +16,7 @@ class Syllable(
     inputText: String = "",
     val prev_syl: ASyllable = EmptySyllable(),
     var next_syl: ASyllable = EmptySyllable(),
-    val word: Word? = null
+    val word: Word = Word("")
 ) : ASyllable() {
 
     val text: String
@@ -45,7 +44,7 @@ class Syllable(
     }
 
     fun fix_start_cons() {
-        if ((prev_syl !is EmptySyllable) and (start_cons + vowels != "tje"))
+        if ((prev_syl !is EmptySyllable) && (start_cons + vowels != "tje"))
         //if we have a previous syllable and our syllable does not contain the diminutive 'tje' (as in autootje)
         {
             while (!((start_cons in LetterDictionaries().valid_consonant_combinations) or
@@ -61,7 +60,7 @@ class Syllable(
 
     fun fix_end_cons(index: Int): Int {
         var index = index
-        if ((end_cons.length == 1) and (end_cons != "x")) {
+        if ((end_cons.length == 1) && (end_cons != "x")) {
             end_cons = ""
             index -= 1
         } else when (end_cons) {
@@ -83,7 +82,7 @@ class Syllable(
 
     fun add_cons(cons: String) {
         if (vowels != "") {
-            if ((vowels + cons == "ij") and (end_cons.isEmpty())) {
+            if ((vowels + cons == "ij") && (end_cons.isEmpty())) {
                 vowels += cons
             } else {
                 end_cons += cons

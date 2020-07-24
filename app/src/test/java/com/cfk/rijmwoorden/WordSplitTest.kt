@@ -12,7 +12,7 @@ import org.junit.Assert.*
 class WordSplitTest {
     @Test
     fun split_word() {
-        val test_dict = mapOf<String, String>(
+        val test_dict = mapOf(
             "laur" to "laur",
             "dromen" to  "dro-men",
             "leerling" to  "leer-ling",

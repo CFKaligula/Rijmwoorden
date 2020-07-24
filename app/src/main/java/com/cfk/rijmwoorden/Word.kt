@@ -5,7 +5,7 @@ private const val TAG = "MyActivity"
 class Word(inputText: String) {
     val text: String = inputText
     val length: Int = text.length
-    val syllables: MutableList<Syllable> = initialize_syllables(0, mutableListOf<Syllable>())
+    val syllables: MutableList<Syllable> = initialize_syllables(0, mutableListOf())
     val phonetisation: String = initialize_phonetisation()
 
 
@@ -52,7 +52,7 @@ class Word(inputText: String) {
 
             //Letter is a consonant
             if (letter in LetterDictionaries().consonants) {
-                if ((letter == "y") and (index == length - 1)) {
+                if ((letter == "y") && (index == length - 1)) {
                     if (syl.end_cons.isNotEmpty()) {
                         index = syl.fix_end_cons(index)
                         break
