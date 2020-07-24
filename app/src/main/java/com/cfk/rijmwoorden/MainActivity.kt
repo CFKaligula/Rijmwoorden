@@ -1,13 +1,16 @@
 package com.cfk.rijmwoorden
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
+
 
 var rhymeType = "vowel"
 
@@ -17,15 +20,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val toggle: ToggleButton = findViewById(R.id.rhyme_type_toggle)
-        toggle.setBackgroundColor(Color.parseColor("#B388FF"))
+        toggle.setBackground(getResources().getDrawable(R.drawable.vowel_rhyme_type_button))
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 rhymeType = "full"
-                toggle.setBackgroundColor(Color.parseColor("#AB47BC"))
+                toggle.setBackground(getResources().getDrawable(R.drawable.full_rhyme_type_button))
                 // The toggle is enabled
             } else {
                 rhymeType = "vowel"
-                toggle.setBackgroundColor(Color.parseColor("#B388FF"))
+                toggle.setBackground(getResources().getDrawable(R.drawable.vowel_rhyme_type_button))
                 // The toggle is disabled
             }
         }
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendMessage(view: View) {
+        hideKeyboard(this)
         val editText = findViewById<EditText>(R.id.input_word)
         val input = editText.text.toString()
         val word = Word(input)
@@ -66,6 +70,17 @@ class MainActivity : AppCompatActivity() {
             text = message
         }
 
+    }
+    fun hideKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
