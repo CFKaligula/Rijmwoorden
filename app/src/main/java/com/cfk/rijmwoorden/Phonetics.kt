@@ -66,7 +66,6 @@ class Phonetics {
 
     fun find_vowel_phonetics(syllable: Syllable): String {
         var vowel_sound = ""
-
         if ((syllable.start_cons == "q") && (syllable.vowels != "") && (syllable.vowels[0] == 'u')) {
             //qua -> kwa
             val new_syllable_text = syllable.vowels.subSequence(1, syllable.vowels.length)
@@ -81,7 +80,6 @@ class Phonetics {
             //citroen -> cítroen
             vowel_sound = add_accent(syllable.vowels)
         } else if (syllable.vowels in LetterDictionaries().vowels) { //the vowel is not a dipthong or tripthong
-
             if (syllable.end_cons == "") {
 
                 vowel_sound = if ((syllable.next_syl !is EmptySyllable) && (syllable.next_syl.start_cons != "") && (syllable.next_syl.start_cons[0].toString() == "r")) {
@@ -141,7 +139,8 @@ class Phonetics {
             "e" to "é",  // beter
             "i" to "í",  // never happens, only in simon i think
             "o" to "ó",  // boven
-            "u" to "ú"
+            "u" to "ú",
+            "y" to "í" //zygote
         )
         return switcher.getOrDefault(vowel, vowel)
     }

@@ -34,24 +34,21 @@ fun getJsonDataFromAsset(context: Context, fileName: String): String? {
 
 fun create_rhyme_dictionaries() {
     val gson = Gson()
-
     val inputStream: InputStream = File("src/main/assets/word_list.json").inputStream()
     val json_word_list = inputStream.bufferedReader().use { it.readText() }
     val converter = object : TypeToken<List<String>>() {}.type
     val words: List<String> = gson.fromJson(json_word_list, converter)
+
     println("got words")
 
     val full_dict = mutableMapOf<String, String>()
     val vowel_dict = mutableMapOf<String, String>()
-    println("got dicts")
-
     for (entry in words) {
         //println(entry)
         if (!(containsInvalidChar(entry))) {
             val word = Word(entry)
             full_dict[word.text] = word.get_rhyme_part("full")
             vowel_dict[word.text] = word.get_rhyme_part("vowel")
-            //println(word.text)
         }
     }
 

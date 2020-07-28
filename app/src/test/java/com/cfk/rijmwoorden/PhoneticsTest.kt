@@ -32,6 +32,15 @@ class PhoneticsTest {
     }
 
 
+
+
+    //@Test
+    fun zygo_test(){
+        assertEquals("kwintí", Word("quinty").phonetisation)
+    }
+
+
+
     @Test
     fun phonetics_dict() {
         val test_dict = mapOf(
@@ -92,7 +101,9 @@ class PhoneticsTest {
             "wordt" to "wort",
             "wondtas" to "wontas",
 
-            "yoga" to "jógá"
+            "yoga" to "jógá",
+
+            "zygote" to "zígót0"
 
         )
         for (test in test_dict) {
