@@ -2,6 +2,7 @@ package com.cfk.rijmwoorden
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -42,6 +43,9 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        findViewById<TextView>(R.id.rhymeWords).setMovementMethod(ScrollingMovementMethod())
+
+
 
     }
 
@@ -50,23 +54,25 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.input_word)
         val input = editText.text.toString()
         val word = Word(input)
-        val rhymepart: String
-        rhymepart = if (rhymeType == "full") {
-            word.get_rhyme_part()
-        } else {
-            word.get_phonetic_vowels()
+        val rhymewords = find_rhyme(input, rhymeType, applicationContext)
+        val rhymepart = word.get_rhyme_part(rhymeType)
+
+        var info_message = ""
+        info_message += "Opgesplitst in lettergrepen: " + word.get_split_word()
+        info_message += "\nFonetisch: " + word.phonetisation
+        info_message += "\nRijmgedeelte: $rhymepart"
+        var rhyme_words_message = ""
+
+        for (word in rhymewords){
+            rhyme_words_message += word + ",\t"
         }
 
-        var message = ""
-        message += "Opgesplitst in lettergrepen: " + word.get_split_word()
-        message += "\nFonetisch: " + word.phonetisation
-        message += "\nRijmgedeelte: $rhymepart"
 
-
-        //val rhymewords = message
-
+        findViewById<TextView>(R.id.info).apply {
+            text = info_message
+        }
         findViewById<TextView>(R.id.rhymeWords).apply {
-            text = message
+            text = rhyme_words_message
         }
 
     }

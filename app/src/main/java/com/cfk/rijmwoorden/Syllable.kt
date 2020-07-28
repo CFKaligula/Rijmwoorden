@@ -37,9 +37,12 @@ class Syllable(
 
     private fun find_cons_and_vowels(text: String) {
         var found_vowel = false
-        for (letter in text) {
-            val letter = letter.toString()
-            if (letter in LetterDictionaries().consonants) {
+        for (i in 0 until text.length) {
+            val letter = text[i].toString()
+            val next_letter = if (i < text.length - 1) text[i + 1].toString() else ""
+            if (letter in LetterDictionaries().consonants || (letter ==
+                    "y" && next_letter in LetterDictionaries().vowels)
+            ) {
                 if (!found_vowel) {
                     start_cons += letter
                 } else {
@@ -48,6 +51,8 @@ class Syllable(
             } else { //letter is a vowel
                 vowels += letter
                 found_vowel = true
+
+
             }
         }
     }
@@ -129,19 +134,6 @@ class Syllable(
         return break_bool
     }
 
-    fun add_y() {
-        when {
-            vowels != "" -> {
-                add_cons("y")
-            }
-            start_cons != "" -> {
-                add_vowel("y", "")
-            }
-            else -> { //THIS SEEMS WEIRD
-                add_vowel("y", "")
-            }
-        }
-    }
 
     fun remove_accents() {
         val unaccented_vowel_list = vowels.map { LetterDictionaries().remove_accent(it.toString()) }

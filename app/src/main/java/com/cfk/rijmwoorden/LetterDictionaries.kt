@@ -5,9 +5,9 @@ import java.lang.IllegalArgumentException
 class LetterDictionaries {
     val consonants: Set<String> = setOf(
         "b", "c", "d", "f", "g", "h", "k", "l", "j",
-        "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"
+        "m", "n", "p", "q", "r", "s", "t", "v", "w", "x",  "z"
     )
-    val vowels: Set<String> = setOf("a", "e", "i", "o", "u")
+    val vowels: Set<String> = setOf("a", "e", "i", "o", "u", "y")
     val vowels_with_accents: Set<String> = setOf("á", "ä", "é", "ë", "í", "ï", "ó", "ö", "ú", "ü")
     val dipthongs: Set<String> = setOf(
         "au", "ou", "ei", "ij", "oe",

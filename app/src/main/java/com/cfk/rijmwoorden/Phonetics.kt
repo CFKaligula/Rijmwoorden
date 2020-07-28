@@ -14,7 +14,7 @@ class Phonetics {
         } else {
             for (i in syllable.start_cons.indices) {
                 //e.g. blokken -> bloken
-                if ((i == 0) and (syllable.start_cons[i].toString() ==
+                if ((i == 0) && (syllable.start_cons[i].toString() ==
                             syllable.prev_syl.end_cons.takeLast(1))
                 ) continue
 
@@ -69,7 +69,7 @@ class Phonetics {
     fun find_vowel_phonetics(syllable: Syllable): String {
         var vowel_sound = ""
 
-        if ((syllable.start_cons == "q") and (syllable.vowels != "") and (syllable.vowels[0] == 'u')) {
+        if ((syllable.start_cons == "q") && (syllable.vowels != "") && (syllable.vowels[0] == 'u')) {
             //qua -> kwa
             val new_syllable_text = syllable.vowels.subSequence(1, syllable.vowels.length)
                 .toString() + syllable.end_cons
@@ -79,7 +79,7 @@ class Phonetics {
                 next_syl = syllable.next_syl
             )
             vowel_sound = find_vowel_phonetics(syl_without_qu) //CHANGED
-        } else if ((syllable.start_cons == "c") and (syllable.vowels == "i")) {
+        } else if ((syllable.start_cons == "c") && (syllable.vowels == "i")) {
             //citroen -> cítroen
             vowel_sound = add_accent(syllable.vowels)
         } else if (syllable.vowels in LetterDictionaries().vowels) { //the vowel is not a dipthong or tripthong
@@ -101,7 +101,7 @@ class Phonetics {
             } else if ((syllable.end_cons == "sch") && (syllable.vowels == "i")) {
                 vowel_sound = add_accent(syllable.vowels)
             } else {
-                vowel_sound = syllable.vowels
+                vowel_sound = default_phonetic_symbol(syllable.vowels)
             }
         } else if ((syllable.end_cons != "") && (syllable.end_cons[0].toString() in setOf(
                 "r",
@@ -164,6 +164,11 @@ class Phonetics {
 
     fun default_phonetic_symbol(dipthong: String): String {
         val switcher = mapOf(
+            "a" to "a",
+            "e" to "e",
+            "i" to "i",
+            "o" to "o",
+            "u" to "u",
             "aa" to "á",
             "ee" to "é",
             "ie" to "í",

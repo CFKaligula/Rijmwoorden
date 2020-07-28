@@ -4,6 +4,8 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,9 +14,11 @@ import org.junit.Assert.*
 class RhymeTest {
     @Test
     fun json_read_test() {
+       create_rhyme_dictionaries()
 
-        val jsonFileString = getJsonDataFromAsset()
-        print(jsonFileString)
+        find_rhyme("lopen", "vowel")
+        find_rhyme("lopen", "full")
+
         assertEquals(true, true)
 
     }

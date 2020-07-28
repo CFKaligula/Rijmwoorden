@@ -28,6 +28,7 @@ class PhoneticsTest {
         assertEquals("í", Phonetics().find_vowel_phonetics(Syllable("tie")))
         assertEquals("e", Phonetics().find_vowel_phonetics(Syllable("pen")))
         assertEquals("á", Phonetics().find_vowel_phonetics(Syllable("ga")))
+        assertEquals("ó", Phonetics().find_vowel_phonetics(Syllable("yo")))
     }
 
 
@@ -74,6 +75,7 @@ class PhoneticsTest {
             "pen" to "pen",
             "praatje" to "práð0",
             "perfectie" to "perfeksí",
+            "psychose" to "psígós0",
 
             "quinty" to "kwintí",
             "quasi" to "kwásí",

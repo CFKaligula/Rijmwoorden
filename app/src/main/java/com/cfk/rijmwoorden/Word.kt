@@ -36,6 +36,7 @@ class Word(inputText: String) {
         //Loop over every letter starting from index
         var index = start
         while (index < length + 1) {
+
             if (index >= length) {
                 break
             }
@@ -46,36 +47,26 @@ class Word(inputText: String) {
                 index++
                 break
             }
-
-
             //Letter is a consonant
             if (letter in LetterDictionaries().consonants) {
-                if ((letter == "y") && (index == length - 1)) {
-                    if (syl.end_cons.isNotEmpty()) {
-                        index = syl.fix_end_cons(index)
-                        break
-                    } else {
-                        syl.add_y()
-                        index++
-                    }
-                } else {
-                    syl.add_cons(letter)
-                    index++
-                }
-
+                syl.add_cons(letter)
+                index++
             }
             //Letter is a vowel
             else if (letter in LetterDictionaries().vowels) {
-                if (syl.end_cons.isNotEmpty()) {
+                if (letter == "y" && next_letter in LetterDictionaries().vowels) {
+
+                    syl.add_cons(letter)
+                    index++
+                } else if (syl.end_cons.isNotEmpty()) {
                     index = syl.fix_end_cons(index)
                     break
                 } else {
+
                     val break_bool = syl.add_vowel(letter, next_letter)
                     if (break_bool) break
                     index++
                 }
-
-
             }//Letter is a vowel with an accent
             else if (letter in LetterDictionaries().vowels_with_accents) {
                 if (syl.vowels.isEmpty()) {
@@ -120,16 +111,22 @@ class Word(inputText: String) {
         return vowels
     }
 
-    fun get_rhyme_part(): String {
-        var start_length = 0
-        for (letter in phonetisation) {
-            val letter = letter.toString()
-            if ((letter in LetterDictionaries().phonetic_system_consonants) or (letter == "0")) {
-                start_length++
-            } else {
-                break
+    fun get_rhyme_part(rhymeType: String): String {
+        var rhyme_part = ""
+        if (rhymeType == "full") {
+            var start_length = 0
+            for (letter in phonetisation) {
+                val letter = letter.toString()
+                if ((letter in LetterDictionaries().phonetic_system_consonants) or (letter == "0")) {
+                    start_length++
+                } else {
+                    break
+                }
             }
+            rhyme_part = phonetisation.subSequence(start_length, phonetisation.length).toString()
+        } else {
+            rhyme_part = get_phonetic_vowels()
         }
-        return phonetisation.subSequence(start_length, phonetisation.length).toString()
+        return rhyme_part
     }
 }
