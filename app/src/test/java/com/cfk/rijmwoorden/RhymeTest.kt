@@ -1,11 +1,8 @@
 package com.cfk.rijmwoorden
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
-import org.junit.Assert.*
-
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

@@ -100,7 +100,7 @@ class Word(inputText: String) {
 
     }
 
-    fun get_phonetic_vowels(): String {
+    private fun get_phonetic_vowels(): String {
         var vowels = ""
         for (letter in phonetisation) {
             val letter = letter.toString()
@@ -113,7 +113,7 @@ class Word(inputText: String) {
 
     fun get_rhyme_part(rhymeType: String): String {
         var rhyme_part = ""
-        if (rhymeType == "full") {
+        rhyme_part = if (rhymeType == "full") {
             var start_length = 0
             for (letter in phonetisation) {
                 val letter = letter.toString()
@@ -123,9 +123,9 @@ class Word(inputText: String) {
                     break
                 }
             }
-            rhyme_part = phonetisation.subSequence(start_length, phonetisation.length).toString()
+            phonetisation.subSequence(start_length, phonetisation.length).toString()
         } else {
-            rhyme_part = get_phonetic_vowels()
+            get_phonetic_vowels()
         }
         return rhyme_part
     }

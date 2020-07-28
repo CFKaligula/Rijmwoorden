@@ -1,7 +1,5 @@
 package com.cfk.rijmwoorden
 
-import android.annotation.SuppressLint
-
 class Phonetics {
 
 
@@ -137,7 +135,7 @@ class Phonetics {
 
 
     
-    fun add_accent(vowel: String): String {
+    private fun add_accent(vowel: String): String {
         val switcher = mapOf(
             "a" to "á",  // la = laa
             "e" to "é",  // beter
@@ -149,7 +147,7 @@ class Phonetics {
     }
 
 
-    fun ending_vowel(vowel: String): String {
+    private fun ending_vowel(vowel: String): String {
         val switcher = mapOf(
             "a" to "á", //ga
             "i" to "í", //bi
@@ -162,7 +160,7 @@ class Phonetics {
     }
 
 
-    fun default_phonetic_symbol(dipthong: String): String {
+    private fun default_phonetic_symbol(dipthong: String): String {
         val switcher = mapOf(
             "a" to "a",
             "e" to "e",
@@ -195,7 +193,7 @@ class Phonetics {
 
 
 
-    fun r_or_l_phonetic_symbol(vowel: String): String {
+    private fun r_or_l_phonetic_symbol(vowel: String): String {
         val switcher = mapOf(
             "aa" to "á:",
             "ee" to "i:",
@@ -212,7 +210,7 @@ class Phonetics {
 
 
 
-    fun next_syl_r(vowel: String): String {
+    private fun next_syl_r(vowel: String): String {
         val switcher = mapOf(
             "o" to "o:",  // blij-e
             "e" to "i:"  // baby

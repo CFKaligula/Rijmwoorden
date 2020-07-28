@@ -1,7 +1,6 @@
 package com.cfk.rijmwoorden
 
 import android.content.Context
-import android.os.Environment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
@@ -39,19 +38,19 @@ fun create_rhyme_dictionaries() {
     val inputStream: InputStream = File("src/main/assets/word_list.json").inputStream()
     val json_word_list = inputStream.bufferedReader().use { it.readText() }
     val converter = object : TypeToken<List<String>>() {}.type
-    var words: List<String> = gson.fromJson(json_word_list, converter)
+    val words: List<String> = gson.fromJson(json_word_list, converter)
     println("got words")
 
-    var full_dict = mutableMapOf<String, String>()
-    var vowel_dict = mutableMapOf<String, String>()
+    val full_dict = mutableMapOf<String, String>()
+    val vowel_dict = mutableMapOf<String, String>()
     println("got dicts")
 
     for (entry in words) {
         //println(entry)
         if (!(containsInvalidChar(entry))) {
-            var word = Word(entry)
-            full_dict.put(word.text, word.get_rhyme_part("full"))
-            vowel_dict.put(word.text, word.get_rhyme_part("vowel"))
+            val word = Word(entry)
+            full_dict[word.text] = word.get_rhyme_part("full")
+            vowel_dict[word.text] = word.get_rhyme_part("vowel")
             //println(word.text)
         }
     }
@@ -74,9 +73,9 @@ fun find_rhyme(inputWord: String, rhymeType: String): List<String> {
     val jsonFileString = getJsonDataFromAsset(filepath)
     val gson = Gson()
     val converter = object : TypeToken<Map<String, String>>() {}.type
-    var words: Map<String, String> = gson.fromJson(jsonFileString, converter)
+    val words: Map<String, String> = gson.fromJson(jsonFileString, converter)
 
-    var rhyme_words = mutableListOf<String>()
+    val rhyme_words = mutableListOf<String>()
     for (word in words) {
         if (word.value == rhyme_part && !containsInvalidChar(word.key)) {
             rhyme_words.add(word.key)
@@ -89,7 +88,7 @@ fun find_rhyme(inputWord: String, rhymeType: String): List<String> {
 fun containsInvalidChar(word: String): Boolean {
     val allowed_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÁÄáäÉËéëÍÏíïÚÜúüÓÖóö-"
     var containsInvalidChar = false
-    if (!word.isEmpty()) {
+    if (word.isNotEmpty()) {
         for (c in word.toCharArray()) {
             if (c !in allowed_characters) {
                 containsInvalidChar = true
@@ -115,8 +114,8 @@ fun find_rhyme(inputWord: String, rhymeType: String, context: Context): List<Str
     val listPersonType = object : TypeToken<Map<String, String>>() {}.type
 
 
-    var words: Map<String, String> = gson.fromJson(jsonFileString, listPersonType)
-    var rhyme_words = mutableListOf<String>()
+    val words: Map<String, String> = gson.fromJson(jsonFileString, listPersonType)
+    val rhyme_words = mutableListOf<String>()
     for (word in words) {
         if (word.value == rhyme_part && !containsInvalidChar(word.key)) {
             rhyme_words.add(word.key)

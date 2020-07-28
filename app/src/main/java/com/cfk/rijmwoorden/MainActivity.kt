@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val toggle: ToggleButton = findViewById(R.id.rhyme_type_toggle)
-        toggle.background = getResources().getDrawable(R.drawable.vowel_rhyme_type_button)
+        toggle.background = resources.getDrawable(R.drawable.vowel_rhyme_type_button)
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 rhymeType = "full"
-                toggle.background = getResources().getDrawable(R.drawable.full_rhyme_type_button)
+                toggle.background = resources.getDrawable(R.drawable.full_rhyme_type_button)
                 // The toggle is enabled
             } else {
                 rhymeType = "vowel"
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        findViewById<TextView>(R.id.rhymeWords).setMovementMethod(ScrollingMovementMethod())
+        findViewById<TextView>(R.id.rhymeWords).movementMethod = ScrollingMovementMethod()
 
 
 
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         var rhyme_words_message = ""
 
         for (word in rhymewords){
-            rhyme_words_message += word + ",\t"
+            rhyme_words_message += "$word,\t"
         }
 
 

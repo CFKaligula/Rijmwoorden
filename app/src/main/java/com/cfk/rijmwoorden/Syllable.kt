@@ -37,7 +37,7 @@ class Syllable(
 
     private fun find_cons_and_vowels(text: String) {
         var found_vowel = false
-        for (i in 0 until text.length) {
+        for (i in text.indices) {
             val letter = text[i].toString()
             val next_letter = if (i < text.length - 1) text[i + 1].toString() else ""
             if (letter in LetterDictionaries().consonants || (letter ==

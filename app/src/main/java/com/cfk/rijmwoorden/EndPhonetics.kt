@@ -1,7 +1,5 @@
 package com.cfk.rijmwoorden
 
-import android.annotation.SuppressLint
-
 class EndPhonetics {
 
     fun default_end_consonant_replacement(ASyllable: ASyllable, i: Int): String {
