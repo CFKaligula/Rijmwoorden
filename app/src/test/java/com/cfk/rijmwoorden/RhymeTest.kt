@@ -15,6 +15,8 @@ class RhymeTest {
 
         find_rhyme("lopen", "vowel")
         find_rhyme("lopen", "full")
+        find_rhyme("eeuw", "vowel")
+        find_rhyme("eeuw", "full")
 
         assertEquals(true, true)
 

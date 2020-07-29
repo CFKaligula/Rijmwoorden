@@ -5,5 +5,5 @@
     <string name="search_button">Zoek!</string>
     <string name="full_rhyme">Volle rijm</string>
     <string name="vowel_rhyme">Klinkerrijm</string>
-    <string name="results">Resultaten:</string>
+    <string name="results">Resultaten</string>
 </resources>

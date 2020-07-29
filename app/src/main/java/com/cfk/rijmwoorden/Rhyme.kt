@@ -41,49 +41,77 @@ fun create_rhyme_dictionaries() {
 
     println("got words")
 
-    val full_dict = mutableMapOf<String, String>()
-    val vowel_dict = mutableMapOf<String, String>()
+    val full_dict = mutableMapOf<String, MutableList<String>>()
+    val vowel_dict = mutableMapOf<String, MutableList<String>>()
     for (entry in words) {
         //println(entry)
         if (!(containsInvalidChar(entry))) {
             val word = Word(entry)
-            full_dict[word.text] = word.get_rhyme_part("full")
-            vowel_dict[word.text] = word.get_rhyme_part("vowel")
+            val full_rhyme_part = word.get_rhyme_part("full")
+
+            if (full_rhyme_part in full_dict) {
+                full_dict[word.get_rhyme_part("full")]?.add(word.text)
+            } else {
+                full_dict[word.get_rhyme_part("full")] = mutableListOf(word.text)
+            }
+
+            val vowel_rhyme_part = word.get_rhyme_part("vowel")
+            if (vowel_rhyme_part in vowel_dict) {
+                vowel_dict[word.get_rhyme_part("vowel")]?.add(word.text)
+            } else {
+                vowel_dict[word.get_rhyme_part("vowel")] = mutableListOf(word.text)
+            }
+
+
         }
     }
-
     val full_json = gson.toJson(full_dict)
     val vowel_json = gson.toJson(vowel_dict)
-    File("src/main/assets/full_dictionary2.json").writeText(full_json)
-    File("src/main/assets/vowel_dictionary2.json").writeText(vowel_json)
+    File("src/main/assets/full_dictionary.json").writeText(full_json)
+    File("src/main/assets/vowel_dictionary.json").writeText(vowel_json)
 }
 
 
 fun find_rhyme(inputWord: String, rhymeType: String): List<String> {
-    val rhyme_part = Word(inputWord).get_rhyme_part(rhymeType)
     val filepath: String = if (rhymeType == "full") {
-        "src/main/assets/full_dictionary2.json"
+        "src/main/assets/full_dictionary.json"
     } else {
-        "src/main/assets/vowel_dictionary2.json"
+        "src/main/assets/vowel_dictionary.json"
     }
-
     val jsonFileString = getJsonDataFromAsset(filepath)
-    val gson = Gson()
-    val converter = object : TypeToken<Map<String, String>>() {}.type
-    val words: Map<String, String> = gson.fromJson(jsonFileString, converter)
+    return find_rhyme_in_json_list(jsonFileString, inputWord, rhymeType)
 
-    val rhyme_words = mutableListOf<String>()
-    for (word in words) {
-        if (word.value == rhyme_part && !containsInvalidChar(word.key)) {
-            rhyme_words.add(word.key)
-            //println(word.key)
-        }
+}
+
+fun find_rhyme(inputWord: String, rhymeType: String, context: Context): List<String> {
+    //val rhyme_part = Word(inputWord).get_rhyme_part(rhymeType)
+    val filepath: String = if (rhymeType == "full") {
+        "full_dictionary.json"
+    } else {
+        "vowel_dictionary.json"
     }
+    val jsonFileString = getJsonDataFromAsset(context, filepath)
+    return find_rhyme_in_json_list(jsonFileString, inputWord, rhymeType)
+}
+
+fun find_rhyme_in_json_list(
+    jsonFileString: String?,
+    inputWord: String,
+    rhymeType: String
+): List<String> {
+    val gson = Gson()
+    val converter = object : TypeToken<Map<String, MutableList<String>>>() {}.type
+    val words: Map<String, MutableList<String>> = gson.fromJson(jsonFileString, converter)
+
+    val rhyme_words = words.getOrDefault(Word(inputWord).get_rhyme_part(rhymeType), mutableListOf())
+    println(rhyme_words)
     return rhyme_words
 }
 
+
 fun containsInvalidChar(word: String): Boolean {
-    val allowed_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÁÄáäÉËéëÍÏíïÚÜúüÓÖóö-"
+    val allowed_characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÁÄáäÉËéëÍÏíïÚÜúüÓÖóö-"
     var containsInvalidChar = false
     if (word.isNotEmpty()) {
         for (c in word.toCharArray()) {
@@ -97,27 +125,4 @@ fun containsInvalidChar(word: String): Boolean {
     return containsInvalidChar
 }
 
-fun find_rhyme(inputWord: String, rhymeType: String, context: Context): List<String> {
-
-
-    val rhyme_part = Word(inputWord).get_rhyme_part(rhymeType)
-    val filepath: String = if (rhymeType == "full") {
-        "full_dictionary2.json"
-    } else {
-        "vowel_dictionary2.json"
-    }
-    val jsonFileString = getJsonDataFromAsset(context, filepath)
-    val gson = Gson()
-    val listPersonType = object : TypeToken<Map<String, String>>() {}.type
-
-
-    val words: Map<String, String> = gson.fromJson(jsonFileString, listPersonType)
-    val rhyme_words = mutableListOf<String>()
-    for (word in words) {
-        if (word.value == rhyme_part && !containsInvalidChar(word.key)) {
-            rhyme_words.add(word.key)
-        }
-    }
-    return rhyme_words
-}
 

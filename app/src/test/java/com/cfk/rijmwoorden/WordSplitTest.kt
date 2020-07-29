@@ -30,7 +30,7 @@ class WordSplitTest {
             "blok-étagere" to "blok-e-ta-ge-re",
             "blaséeend" to  "bla-se-eend",
             "baby" to "ba-by",
-            "babyopera" to "ba-by-o-pe-ra",
+            //"babyopera" to "ba-by-o-pe-ra",
             "sexy" to "sex-y",
             "babby" to "bab-by",
             "yoghurt" to "yog-hurt",
@@ -58,6 +58,8 @@ class WordSplitTest {
     fun test_y(){
         assertEquals("yog", Word("yog").get_split_word())
     }
+
+
 
 
 

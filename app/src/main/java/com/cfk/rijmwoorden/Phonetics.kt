@@ -161,6 +161,10 @@ class Phonetics {
 
     private fun default_phonetic_symbol(dipthong: String): String {
         val switcher = mapOf(
+            "eeu" to "1",
+            "ieu" to "í",
+
+            "" to "",
             "a" to "a",
             "e" to "e",
             "i" to "i",

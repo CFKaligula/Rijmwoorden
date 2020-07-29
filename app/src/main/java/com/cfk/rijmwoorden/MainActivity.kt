@@ -1,6 +1,7 @@
 package com.cfk.rijmwoorden
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.KeyEvent
@@ -46,11 +47,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.rhymeWords).movementMethod = ScrollingMovementMethod()
 
 
-
     }
 
     fun sendMessage(view: View) {
         hideKeyboard(this)
+
         val editText = findViewById<EditText>(R.id.input_word)
         val input = editText.text.toString()
         val word = Word(input)
@@ -61,21 +62,25 @@ class MainActivity : AppCompatActivity() {
         info_message += "Opgesplitst in lettergrepen: " + word.get_split_word()
         info_message += "\nFonetisch: " + word.phonetisation
         info_message += "\nRijmgedeelte: $rhymepart"
-        var rhyme_words_message = ""
-
-        for (word in rhymewords){
-            rhyme_words_message += "$word,\t"
-        }
-
-
         findViewById<TextView>(R.id.info).apply {
             text = info_message
         }
+
+        var rhyme_words_message = ""
+        for (i in rhymewords.indices) {
+            if (i < rhymewords.size) {
+                rhyme_words_message += "${rhymewords[i]},\t"
+            } else {
+                rhyme_words_message += "${rhymewords[i]}"
+            }
+        }
+        findViewById<TextView>(R.id.rhymeWords).setBackgroundColor(Color.parseColor("#eeeeee"))
         findViewById<TextView>(R.id.rhymeWords).apply {
+
             text = rhyme_words_message
         }
-
     }
+
 
     private fun hideKeyboard(activity: Activity) {
         val imm: InputMethodManager =

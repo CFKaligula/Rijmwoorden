@@ -34,9 +34,13 @@ class PhoneticsTest {
 
 
 
-    //@Test
+    @Test
     fun zygo_test(){
-        assertEquals("kwintí", Word("quinty").phonetisation)
+        assertEquals("1w", Word("eeuw").phonetisation)
+    }
+    @Test
+    fun tv_test(){
+        assertEquals("tv", Word("tv").phonetisation)
     }
 
 
